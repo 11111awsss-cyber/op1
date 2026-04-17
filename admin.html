@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة الإدارة</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<div id="loginBox">
+<h2>تسجيل الدخول</h2>
+<input id="username" placeholder="Username">
+<input id="password" type="password" placeholder="Password">
+<button onclick="login()">دخول</button>
+</div>
+
+<div id="panel" style="display:none;">
+<h1>📊 جميع الردود</h1>
+<div id="data"></div>
+</div>
+
+</div>
+
+<script>
+function login(){
+let user = document.getElementById("username").value;
+let pass = document.getElementById("password").value;
+
+if(user === "admin" && pass === "admin"){
+document.getElementById("loginBox").style.display = "none";
+document.getElementById("panel").style.display = "block";
+loadData();
+}else{
+alert("اسم المستخدم أو كلمة المرور خطأ");
+}
+}
+
+function loadData(){
+let forms = JSON.parse(localStorage.getItem("forms") || "[]");
+
+let container = document.getElementById("data");
+container.innerHTML = "";
+
+forms.reverse().forEach(d => {
+let div = document.createElement("div");
+div.className = "card";
+
+div.innerHTML = `
+<p><b>🏫 ${d.school}</b></p>
+<p>👨‍👩‍👧‍👦 ${d.q1}</p>
+<p>🎓 ${d.q2}</p>
+<p>📊 ${d.q3}</p>
+<p>💡 ${d.suggestions}</p>
+<p>⏰ ${d.time}</p>
+`;
+
+container.appendChild(div);
+});
+}
+</script>
+
+</body>
+</html>

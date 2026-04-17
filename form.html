@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>استبيان</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<h4 class="top">المديرية: لواءي الطيبة والوسطية</h4>
+<h1>استبيان ملتقى الطلاب البرلماني</h1>
+
+<label>اسم المدرسة:</label>
+<input id="school" placeholder="اكتب اسم المدرسة هنا">
+
+<label>ما مدى رضا أولياء الأمور عن مشاركة أبنائهم في البرلمان الطلابي؟</label>
+<select id="q1">
+<option>عالي جداً</option>
+<option>عالي</option>
+<option>متوسط</option>
+<option>ضعيف</option>
+</select>
+
+<label>ما مدى رضا الطلبة عن مشاركتهم في البرلمان الطلابي؟</label>
+<select id="q2">
+<option>عالي جداً</option>
+<option>عالي</option>
+<option>متوسط</option>
+<option>ضعيف</option>
+</select>
+
+<label>ما مدى رضاك عن ملتقى البرلمان الطلابي؟</label>
+<select id="q3">
+<option>عالي جداً</option>
+<option>عالي</option>
+<option>متوسط</option>
+<option>ضعيف</option>
+</select>
+
+<label>اقتراحات وتحسينات</label>
+<textarea id="suggestions"></textarea>
+
+<button onclick="send()">إرسال النموذج</button>
+
+<p class="footer">by aws qasem abu zaitoon</p>
+
+</div>
+
+<script>
+function send(){
+let data = {
+school: document.getElementById("school").value,
+q1: document.getElementById("q1").value,
+q2: document.getElementById("q2").value,
+q3: document.getElementById("q3").value,
+suggestions: document.getElementById("suggestions").value,
+time: new Date().toLocaleString()
+};
+
+let all = JSON.parse(localStorage.getItem("forms")||"[]");
+all.push(data);
+localStorage.setItem("forms", JSON.stringify(all));
+
+alert("تم الإرسال بنجاح");
+}
+</script>
+
+</body>
+</html>
